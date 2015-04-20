@@ -1,7 +1,6 @@
 <p id="notice"><%= notice %></p>
 
-<% {today: @today, yesterday: @yesterday}.each do |day, i| %>
-<h1>Accounts created <%= day %></h1>
+<h1>Listing Accounts</h1>
 
 <table>
   <thead>
@@ -9,24 +8,16 @@
       <th>Is spammer</th>
       <th>Name</th>
       <th>Id</th>
-      <th>Siblings</th>
-      <th>Downvotes</th>
       <th colspan="3"></th>
     </tr>
   </thead>
 
   <tbody>
-    <% i.each do |account| %>
+    <% @accounts.each do |account| %>
       <tr>
         <td><%= account.is_spammer %></td>
-        <td>
-          <a href="http://genius.com/<%= account.name %>">
-            <%= account.name %>
-          </a>
-        </td>
+        <td><%= account.name %></td>
         <td><%= account.id %></td>
-        <td><%= account.siblings.count %></td>
-        <td><%= account.downvotes.count %></td>
         <td><%= link_to 'Show', account %></td>
         <td><%= link_to 'Edit', edit_account_path(account) %></td>
         <td><%= link_to 'Destroy', account, method: :delete, data: { confirm: 'Are you sure?' } %></td>
@@ -36,6 +27,5 @@
 </table>
 
 <br>
-<% end -%>
 
 <%= link_to 'New Account', new_account_path %>

@@ -4,6 +4,12 @@ class AccountsController < ApplicationController
   # GET /accounts
   # GET /accounts.json
   def index
+
+    @today = Account.created_on(Time.now).sort_by {|x| -x.siblings.count}
+    @yesterday = Account.created_on(1.day.ago).sort_by {|x| -x.siblings.count}
+  end
+
+  def all
     @accounts = Account.all
   end
 
@@ -69,6 +75,6 @@ class AccountsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def account_params
-      params.require(:account).permit(:is_spammer, :name, :id)
+      params.require(:account).permit(:is_spammer, :name)
     end
 end
