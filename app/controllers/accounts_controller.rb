@@ -1,16 +1,19 @@
 class AccountsController < ApplicationController
+
   before_action :set_account, only: [:show, :edit, :update, :destroy]
 
   # GET /accounts
   # GET /accounts.json
-  def index
-
-    @today = Account.created_on(Time.now).sort_by {|x| -x.siblings.count}
-    @yesterday = Account.created_on(1.day.ago).sort_by {|x| -x.siblings.count}
-  end
-
-  def all
-    @accounts = Account.all
+  def index()
+    if params[:date]
+      date = Date.strptime(params[:date], '%Y-%m-%d')
+    else
+      date = Time.now
+    end
+    @hours = Hash.new { |hash, key| hash[key] = [] }
+    Account.created_on(date).where.not(is_spammer:0).each do |e|
+      @hours[e.created.strftime '%-l %P'] << e
+    end
   end
 
   # GET /accounts/1

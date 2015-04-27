@@ -47,7 +47,7 @@ module Genius
         end
 
         def user (login)
-            User.new login: login, user_page: (user_page login)
+            User.new login: login, page: (user_page login)
         end
 
         Prod = HTMLGenius.new 'http://genius.com'
@@ -124,11 +124,25 @@ module Genius
             return @api_page = (APIGenius.active.user_page @id) if APIGenius.active and not @id.nil?
         end
 
-        def get_page(genius)
-            @page = genius.user_page login
+        def get_page(genius=nil)
+            unless genius
+                genius = Genius::HTMLGenius.active 
+            end
+            if genius
+                @page = genius.user_page login
+            else
+                raise ArgumentError.new("If there is no active genius instance, you must pass one")
+            end
         end
-        def get_api_page(api)
-            @api_page = api.user_page id
+        def get_api_page(api=nil)
+            unless api
+                api = Genius::APIGenius.active 
+            end
+            if api
+                @api_page = api.user_page id
+            else
+                raise ArgumentError.new("If there is no active genius instance, you must pass one")
+            end
         end
 
         def mark_as_spam(confirm)
@@ -150,12 +164,30 @@ module Genius
             end
         end
 
-        def is_boxed
-            unless page.form action: /toggle_penalty_status/
+        def box_form
+            form = page.form action: /toggle_penalty_status/
+            unless form
                 raise NotAuthorizedError.new "Not authorized to view penalty boxes!"
             end
-            (page.form action: /toggle_penalty_status/)['new_penalty_status'] == "true"
+            form
         end
+        
+        def is_boxed
+            box_form['new_penalty_status'] == "true"
+        end
+
+        def box
+            unless is_boxed
+                 box_form.submit
+            end
+        end
+
+        def unbox
+            if is_boxed
+                 box_form.submit
+            end
+        end
+
     end
 
     class NotAuthorizedError < StandardError

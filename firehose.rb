@@ -39,6 +39,7 @@ all_strategies = Set[
     "user_added_a_suggestion_to_song",
     "user_accepted_comment",
     "user_accepted_annotation",
+    "user_rejected_annotation",
     "user_merged_annotation_edit",
     "user_pyonged_annotation",
     "user_incorporated_annotation",
@@ -76,7 +77,7 @@ socket['activity_stream.firehose'].bind('new_activity') do |data|
             of_user, by_user = details.root.css('[data-badge-user-id]').map{|i|i['data-badge-user-id']}
             thread = details.link(href: /discussions/).href.split('/')[-1].split('-')[0]
             puts "downvote by #{user} (#{id}) in thread #{thread}"
-            Downvote.create(by_user: id, of_user: of_user, thread: thread)
+            Downvote.create(by_user_id: id, of_user_id: of_user, thread: thread)
         end
         # binding.pry
     end

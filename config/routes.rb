@@ -1,4 +1,9 @@
 Rails.application.routes.draw do
+
+
+  get "accounts/(:date)" => "accounts#index", 
+      :constraints => { :date => /\d{4}-\d{2}-\d{2}/ }
+      # :as => "acc"
   resources :accounts
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

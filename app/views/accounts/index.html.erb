@@ -1,7 +1,7 @@
 <p id="notice"><%= notice %></p>
 
-<% {today: @today, yesterday: @yesterday}.each do |day, i| %>
-<h1>Accounts created <%= day %></h1>
+<% @hours.each do |day, i| %>
+<h1><%= day %></h1>
 
 <table>
   <thead>
@@ -10,6 +10,7 @@
       <th>Name</th>
       <th>Id</th>
       <th>Siblings</th>
+      <th>Connected Social?</th>
       <th>Downvotes</th>
       <th colspan="3"></th>
     </tr>
@@ -27,6 +28,7 @@
         <td><%= account.id %></td>
         <td><%= account.siblings.count %></td>
         <td><%= account.downvotes.count %></td>
+        <td><%= account.from_social %></td>
         <td><%= link_to 'Show', account %></td>
         <td><%= link_to 'Edit', edit_account_path(account) %></td>
         <td><%= link_to 'Destroy', account, method: :delete, data: { confirm: 'Are you sure?' } %></td>

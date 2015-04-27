@@ -3,7 +3,7 @@ class Account < ActiveRecord::Base
 		class_name: "Account", join_table: "account_links",
 		foreign_key: "self", association_foreign_key: "other"
 
-	has_many :downvotes, foreign_key: "by_user"
+	has_many :downvotes, foreign_key: "by_user_id"
 
 	enum is_spammer: [:no, :maybe, :yes]
 
