@@ -24,5 +24,4 @@ test:
 
 production:
   <<: *default
-  database: spamdev
-  user: evan
+  url: <%= ENV['DATABASE_URL'] %>
