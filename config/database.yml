@@ -8,11 +8,11 @@ default: &default
   adapter: postgresql
   pool: 5
   timeout: 5000
+  user: <%= ENV['DB_USER'] %>
 
 development:
   <<: *default
   database: spamdev
-  user: evan
 
 # Warning: The database defined as "test" will be erased and
 # re-generated from your development database when you run "rake".
@@ -20,8 +20,8 @@ development:
 test:
   <<: *default
   database: spamtest
-  user: evan
 
 production:
   <<: *default
+  database: spamgenius
   url: <%= ENV['DATABASE_URL'] %>
