@@ -83,4 +83,10 @@ socket['activity_stream.firehose'].bind('new_activity') do |data|
     end
 end
 
+socket.bind('pusher:error') do |data|
+    # whee supervisord!
+    p data
+    abort
+ end
+
 socket.connect
