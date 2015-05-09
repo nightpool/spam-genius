@@ -1,3 +1,11 @@
+GIT
+  remote: git://github.com/pusher/pusher-websocket-ruby.git
+  revision: eecafe93a0e9fa4b30bcc2e6b362c7920a55b7ac
+  specs:
+    pusher-client (0.6.0)
+      json
+      websocket (~> 1.0)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -98,9 +106,6 @@ GEM
       coderay (~> 1.1.0)
       method_source (~> 0.8.1)
       slop (~> 3.4)
-    pusher-client (0.6.0)
-      json
-      websocket (~> 1.0)
     rack (1.6.0)
     rack-test (0.6.3)
       rack (>= 1.0)
@@ -175,7 +180,7 @@ GEM
       railties (>= 4.0)
       sprockets-rails (>= 2.0, < 4.0)
     webrobots (0.1.1)
-    websocket (1.2.1)
+    websocket (1.2.2)
 
 PLATFORMS
   ruby
@@ -188,7 +193,7 @@ DEPENDENCIES
   mechanize
   pg
   pry
-  pusher-client
+  pusher-client!
   rails (= 4.2.1)
   rails_12factor
   rest-client

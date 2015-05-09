@@ -6,12 +6,12 @@ class AccountsController < ApplicationController
   # GET /accounts.json
   def index()
     if params[:date]
-      date = Date.strptime(params[:date], '%Y-%m-%d')
+      @date = Date.strptime(params[:date], '%Y-%m-%d')
     else
-      date = Time.now
+      @date = Date.today
     end
     @hours = Hash.new { |hash, key| hash[key] = [] }
-    Account.created_on(date).where.not(is_spammer:0).each do |e|
+    Account.created_on(@date).where.not(is_spammer:0).each do |e|
       @hours[e.created.strftime '%-l %P'] << e
     end
   end

@@ -1,7 +1,7 @@
 <p id="notice"><%= notice %></p>
-
+<h1><%= @date %></h1>
 <% @hours.each do |day, i| %>
-<h1><%= day %></h1>
+<h2><%= day %></h2>
 
 <table>
   <thead>
@@ -40,4 +40,5 @@
 <br>
 <% end -%>
 
-<%= link_to 'New Account', new_account_path %>
+<%= link_to @date.yesterday, "/accounts/#{@date.yesterday}" %>
+<%= link_to @date.tomorrow, "/accounts/#{@date.tomorrow}" unless @date.tomorrow.future? %>

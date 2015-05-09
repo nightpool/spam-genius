@@ -16,7 +16,7 @@ gem 'coffee-rails', '~> 4.1.0'
 # gem 'therubyracer', platforms: :ruby
 
 gem 'mechanize'
-gem 'pusher-client'
+gem 'pusher-client', github: 'pusher/pusher-websocket-ruby'
 gem 'rest-client'
 
 # Use jquery as the JavaScript library
