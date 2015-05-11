@@ -8,7 +8,7 @@ class AccountsController < ApplicationController
     if params[:date]
       @date = Date.strptime(params[:date], '%Y-%m-%d')
     else
-      @date = Date.today
+      @date = Time.zone.today
     end
     @hours = Hash.new { |hash, key| hash[key] = [] }
     Account.created_on(@date).order(created: :desc, downvote_counter: :asc).each do |e|
