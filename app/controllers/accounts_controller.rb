@@ -11,9 +11,11 @@ class AccountsController < ApplicationController
       @date = Date.today
     end
     @hours = Hash.new { |hash, key| hash[key] = [] }
-    Account.created_on(@date).where.not(is_spammer:0).each do |e|
+    Account.created_on(@date).order(created: :desc, downvote_counter: :asc).each do |e|
       @hours[e.created.strftime '%-l %P'] << e
     end
+
+    #.where.not(is_spammer:0)
   end
 
   # GET /accounts/1

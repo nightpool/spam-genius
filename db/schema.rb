@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150421043829) do
+ActiveRecord::Schema.define(version: 20150511000009) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -25,12 +25,14 @@ ActiveRecord::Schema.define(version: 20150421043829) do
   add_index "account_links", ["self"], name: "index_account_links_on_self", using: :btree
 
   create_table "accounts", force: :cascade do |t|
-    t.integer  "is_spammer", default: 0
+    t.integer  "is_spammer",       default: 0
     t.string   "name"
-    t.datetime "created_at",             null: false
-    t.datetime "updated_at",             null: false
+    t.datetime "created_at",                   null: false
+    t.datetime "updated_at",                   null: false
     t.datetime "created"
     t.string   "photo"
+    t.boolean  "from_social"
+    t.integer  "downvote_counter"
   end
 
   add_index "accounts", ["id"], name: "index_accounts_on_id", unique: true, using: :btree

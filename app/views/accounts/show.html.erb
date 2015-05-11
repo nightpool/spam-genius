@@ -15,5 +15,19 @@
   <%= @account.id %>
 </p>
 
+<p>
+  <strong>Downvotes:</strong>
+  <%= @account.downvotes.size %>
+</p>
+
+<p>
+  <strong>siblings:</strong>
+  <ul>
+  <% @account.siblings.each do |i| -%>
+  	<li> <a href="genius.com/<%= i.name %>"><%= i.name %></a> (<%= i.id %>)</li>
+  <% end -%>
+  </ul>
+</p>
+
 <%= link_to 'Edit', edit_account_path(@account) %> |
 <%= link_to 'Back', accounts_path %>
