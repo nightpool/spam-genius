@@ -188,6 +188,18 @@ module Genius
             end
         end
 
+        def clear_votes
+            
+        end
+
+        def mark_spam
+            spam_form = page.form action: /mark_spam/
+            unless spam_form
+                raise NotAuthorizedError.new "Not authorized to mark as spam!"
+            end
+            spam_form.submit
+        end
+
     end
 
     class NotAuthorizedError < StandardError
